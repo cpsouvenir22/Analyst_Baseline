@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <title>{{event.event_name}}</title>
+    {% load static %} 
+    <link rel="stylesheet" href="{% static 'css/event_style.css' %}">
+</head>
+<body>
+    <a href="/intel">Return to Homepage</a>
+    <h1>{{event.event_name}}</h1>
+    <br>
+    <h5 class="text-right">created on {{event.created_at}}</h5>
+    <br>
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-subtitle">Date: {{event.event_date}}</h4>
+            <br><br>
+            <h3 class="card-subtitle">Group Associated: <a href="/intel/group/{{event.group.id}}">{{event.group.group_name}}</a></h3>
+            <br><br>
+            <h4 class="card-subtitle">Description:</h4>
+            <p class="card-text">
+                {{event.description}}
+            </p>
+    </div>
+    <h4></h4>
+    <h4></h4>
+
+</body>
+</html>

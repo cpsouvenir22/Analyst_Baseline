@@ -1,0 +1,18 @@
+body{
+    background-image: url("images/Intelligence_dashboard.jpeg");
+    color: mediumseagreen;
+    text-align: center;
+    padding: 20px;
+}
+body h1{
+    color:lime;
+}
+
+form{
+    display: inline-block;
+    background-color: navajowhite;
+    border: olive 2px solid;
+    width: 600px;
+    vertical-align: top;
+    padding: 15px;
+}

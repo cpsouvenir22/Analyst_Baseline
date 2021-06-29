@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <title>{{group.group_name}}</title>
+    {% load static %} 
+    <link rel="stylesheet" href="{% static 'css/group_style.css' %}">
+</head>
+<body>
+    <a href="/intel">Return to Homepage</a>
+    <h1 class= "text-center">{{group.group_name}}</h1>
+    <br>
+    <h5 class="text-right">created on {{group.created_at}}</h5>
+    <br>
+    <h4 class= "card-body">{{group.description}}</h4>
+
+
+    <table class="table table-bordered">
+        
+        <thead>
+            <tr>
+                <th>Event</th>
+                <th>Date</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        {% for event in group.activities.all %}
+        <tbody>
+            <tr>
+                <td>{{event.event_name}}</td>
+                <td>{{event.event_date}}</td>
+                <td><a href="/intel/event/{{event.id}}">View</a> | <a href="/intel">Edit</a> |
+                    <a href="/intel/event/{{event.id}}/delete">Delete</a></td>
+            </tr>
+        </tbody>
+        {% endfor %}
+        </table>
+</body>
+</html>

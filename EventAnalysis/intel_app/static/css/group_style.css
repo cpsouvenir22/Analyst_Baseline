@@ -1,0 +1,21 @@
+body {
+    background-image: url("images/global_background.jpeg");
+    color:burlywood;
+    padding: 20px;
+    text-align: center;
+    
+
+}
+
+.card-body{
+    text-align: left;
+    background-color: white;
+    color: black;
+    border: 2px solid black;
+    width: 700px;
+    
+}
+
+table{
+    background-color: white;
+}

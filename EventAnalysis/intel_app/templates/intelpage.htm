@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <title>Homepage</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/intel_style.css' %}">
+</head>
+<body>
+    <div id="header">
+        <h1 class= "text-white">ANALYST'S BASELINE</h1>
+            <p class= "text-right">Logged in as <a href="">{{request.session.first_name}}</a> <a href="/user/logout">Log Out</a></p>
+    </div>
+    
+
+    {% for message in messages %}
+    <p>{{message}}</p>
+    {% endfor %}
+
+    
+
+    <div class="group">
+        
+        
+            <form action="/intel/group/create" method="POST">
+                <h1>Enter a Group</h1>
+                {% csrf_token %}
+                Name: 
+                <br>
+                <input type="text" name="group_name">
+                <br>
+                <br>
+                
+                Description:
+                <br>
+                <textarea name="description" cols="15" rows="10"></textarea>
+                <br>
+                <input type="submit">
+            </form>
+
+            
+            <form action="/intel/event/create" method="POST">
+                <h1>Enter an Event</h1>
+                {% csrf_token %}
+                    Event: 
+                    <br>
+                    <input type="text" name="event_name">
+                    <br>
+                    Group: 
+                    <br>
+                    <select name="group" >
+                        {% for group in Groups.all %}
+                            <option value="{{group.id}}">{{group.group_name}}</option>
+                        {% endfor %}
+                    </select>
+                    <br>
+                    Date: 
+                    <br>
+                    <input type="date" name="event_date">
+                    <br>
+                    <br>
+                    Description: 
+                    <br>
+                    <textarea name="description" cols="15" rows="10"></textarea>
+                    <br>
+                    <input type="submit">
+                
+            </form>
+
+        
+    </div>
+    
+
+    <div class="event">
+            <h1>Groups/Organizations:</h1>
+            <br>
+            <table class="table table-bordered">
+                
+                <thead >
+                    <tr>
+                        <th>Group</th>
+                        <th>Created By</th>
+                        <th>Actions</th>
+                        
+                    </tr>
+                </thead>
+                {% for g in Groups %}
+                <tbody>
+                    <tr>
+                        <td>{{g.group_name}}</td>
+                        <td>{{g.creator.first_name}} {{g.creator.last_name}}</td>
+                        <td><a href="/intel/group/{{g.id}}">View</a> | <a href="/intel">Edit</a> | <a href="/intel/group/{{g.id}}/delete">Delete</a></td>
+                    </tr>
+                </tbody>
+                {% endfor %}
+            </table>
+
+            <br>
+        
+            <h1>Events:</h1>
+            <br>
+            <table class="table table-bordered">
+                
+                <thead>
+                    <tr>
+                        <th>Event</th>
+                        <th>Date</th>
+                        <th>Created By</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                {% for e in Events %}
+                <tbody>
+                    <tr>
+                        <td>{{e.event_name}}</td>
+                        <td>{{e.event_date}}</td>
+                        <td>{{e.creator.first_name}}</td>
+                        <td><a href="/intel/event/{{e.id}}">View</a> | <a href="/intel">Edit</a> |
+                        <a href="/intel/event/{{e.id}}/delete">Delete</a></td>
+                    </tr>
+                </tbody>
+                {% endfor %}
+            </table>
+    </div>
+    
+    <script
+    src="https://code.jquery.com/jquery-3.6.0.js"
+    integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+    crossorigin="anonymous"></script>
+    <script src="{% static 'jquery/intelscript.js' %}"></script>
+</body>
+</html>
